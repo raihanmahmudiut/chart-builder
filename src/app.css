@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+/* Dashboard Builder Custom Styles */
+
+/* Grid background for transparency */
+.grid-bg {
+	background-image:
+		linear-gradient(to right, rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+	background-size: 20px 20px;
+}
+
+/* Drag and drop styles */
+.drop-active {
+	@apply ring-2 ring-blue-300;
+}
+
+.drop-over {
+	@apply ring-2 ring-blue-500;
+}
+
+/* Widget styles */
+.widget-dragging {
+	@apply opacity-50;
+}
+
+/* Resize handle styles */
+.resize-handle {
+	@apply opacity-0 transition-opacity duration-200 group-hover:opacity-100;
+}
+
+.resize-handle::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background-color: #3b82f6;
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* For widgets in selection mode */
+.widget-selected .resize-handle {
+	@apply opacity-100;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #bbb;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #999;
+}
+
+/* Animation for dashboard elements */
+.widget-enter {
+	animation: widget-pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes widget-pop-in {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Focus styles */
+.focus-ring {
+	@apply focus:ring-2 focus:ring-blue-500 focus:outline-none;
+}
+
+/* Button styles */
+.btn {
+	@apply rounded-md px-4 py-2 text-sm font-medium transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none;
+}
+
+.btn-primary {
+	@apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.btn-secondary {
+	@apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-blue-500;
+}
+
+.btn-danger {
+	@apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+/* Tooltip styles */
+.tooltip {
+	@apply invisible absolute -mt-8 rounded bg-gray-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200;
+}
+
+.tooltip-container:hover .tooltip {
+	@apply visible opacity-100;
+}
