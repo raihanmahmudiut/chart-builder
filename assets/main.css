@@ -1,0 +1,40 @@
+/* Main CSS file */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom styles for drag and drop */
+.drop-active {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.drop-over {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 2px dashed #3b82f6;
+}
+
+/* Resize handle styles */
+.resize-handle {
+  position: absolute;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.resize-handle:hover {
+  background-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Prevent text selection during drag/resize */
+.dragging,
+.resizing {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body.resizing {
+  cursor: nwse-resize !important;
+}
+

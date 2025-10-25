@@ -1,65 +1,100 @@
-# Dashboard Builder
+# Vue Dashboard Builder
 
-## Project Description
-
-Dashboard Builder is a Svelte-based application that allows users to create and manage customizable dashboards with various widgets.
-
-## Installation Instructions
-
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Install dependencies using `npm install`.
-
-## Usage Guidelines
-
-- Run the development server using `npm run dev`.
-- Access the application at `http://localhost:3000`.
+A powerful drag-and-drop dashboard builder built with Vue 3, Nuxt 3, Vuetify, and Tailwind CSS.
 
 ## Features
 
-- Drag and drop widgets.
-- Resize and minimize widgets.
-- Save and load dashboard configurations.
+- 🎨 Drag and drop widgets from palette to canvas
+- 📏 Resize widgets with 8-directional handles
+- 🎯 Snap-to-grid positioning
+- 📊 Multiple widget types (Charts, KPI cards, etc.)
+- 💾 Auto-save to localStorage
+- ⚡ Built with modern Vue 3 Composition API
+- 🎭 Vuetify components + Tailwind utility classes
 
-## Contributing
+## Tech Stack
 
-Contributions are welcome! Please fork the repository and submit a pull request.
+- **Nuxt 3** - Vue framework with SSR
+- **Vue 3** - Composition API
+- **Vuetify 3** - Material Design components
+- **Tailwind CSS** - Utility-first CSS
+- **Pinia** - State management
+- **VueUse** - Composition utilities
+- **Chart.js** - Charting library
+
+## Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Project Structure
+
+```
+vue-dashboard-builder/
+├── components/
+│   ├── builder/
+│   │   ├── DashboardCanvas.vue
+│   │   ├── WidgetPalette.vue
+│   │   ├── WidgetWrapper.vue
+│   │   ├── PropertyEditor.vue
+│   │   └── MinimizedWidgetsContainer.vue
+│   └── widgets/
+│       ├── ChartWidget.vue
+│       ├── KpiCard.vue
+│       └── WidgetFactory.vue
+├── composables/
+│   ├── useDraggable.ts
+│   ├── useDroppable.ts
+│   └── useResizable.ts
+├── stores/
+│   └── dashboard.ts
+├── types/
+│   ├── widgets.ts
+│   └── layouts.ts
+├── pages/
+│   └── index.vue
+└── plugins/
+    └── vuetify.ts
+```
+
+## Core Functionality
+
+### Drag & Drop
+- Drag widgets from palette to canvas
+- Reposition existing widgets
+- Visual feedback during drag operations
+
+### Resize
+- 8-directional resize handles
+- Snap to grid
+- Minimum/maximum size constraints
+
+### State Management
+- Centralized Pinia store
+- Auto-save to localStorage
+- Undo/redo support (coming soon)
+
+### Widget Types
+- Line Chart
+- Bar Chart
+- Pie Chart
+- KPI Card
+- Data Table (coming soon)
+- Text Block (coming soon)
+- Image (coming soon)
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
