@@ -4,6 +4,37 @@
     <v-card-text class="pa-4">
       <!-- Upload CSV -->
       <div class="mb-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium">CSV Upload</span>
+          <v-menu>
+            <template #activator="{ props }">
+              <v-btn
+                size="x-small"
+                variant="text"
+                color="primary"
+                prepend-icon="mdi-download"
+                v-bind="props"
+              >
+                Examples
+              </v-btn>
+            </template>
+            <v-list density="compact">
+              <v-list-item @click="downloadExampleCSV('all')">
+                <v-list-item-title>All Templates</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="downloadExampleCSV('timeseries')">
+                <v-list-item-title>Time Series (Line/Bar)</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="downloadExampleCSV('categories')">
+                <v-list-item-title>Categories (Pie Chart)</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="downloadExampleCSV('kpi')">
+                <v-list-item-title>KPI Metrics</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        
         <v-file-input
           v-model="uploadedFile"
           label="Upload CSV File"
@@ -13,6 +44,36 @@
           density="compact"
           @update:model-value="handleFileUpload"
         />
+        
+        <!-- Format Guide -->
+        <v-expansion-panels variant="accordion" class="mt-2">
+          <v-expansion-panel>
+            <v-expansion-panel-title class="text-xs">
+              <v-icon size="small" class="mr-2">mdi-information</v-icon>
+              CSV Format Guide
+            </v-expansion-panel-title>
+            <v-expansion-panel-text class="text-xs">
+              <div class="space-y-2">
+                <p class="font-medium">Required format:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                  <li>First row must contain column headers</li>
+                  <li>Each row represents one data point</li>
+                  <li>Use comma (,) as delimiter</li>
+                </ul>
+                
+                <p class="font-medium mt-3">Example columns for charts:</p>
+                <code class="block bg-gray-100 p-2 rounded text-xs">
+                  date,category,value,label
+                </code>
+                
+                <p class="font-medium mt-3">Example columns for KPI:</p>
+                <code class="block bg-gray-100 p-2 rounded text-xs">
+                  metric,value,target,trend
+                </code>
+              </div>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </div>
 
       <!-- API Endpoint -->
@@ -186,6 +247,84 @@ const fetchFromAPI = async () => {
 const deleteDataSource = (id: string) => {
   dataSources.value = dataSources.value.filter(ds => ds.id !== id)
   localStorage.setItem('dashboard-data-sources', JSON.stringify(dataSources.value))
+}
+
+const downloadExampleCSV = (type: string = 'all') => {
+  // Create example CSV data for different widget types
+  const templates = {
+    timeseries: {
+      name: 'timeseries-example.csv',
+      content: `date,revenue,expenses,profit
+2024-01,45000,32000,13000
+2024-02,52000,35000,17000
+2024-03,48000,33000,15000
+2024-04,61000,38000,23000
+2024-05,58000,36000,22000
+2024-06,67000,40000,27000`
+    },
+    
+    categories: {
+      name: 'categories-example.csv',
+      content: `category,value,percentage
+Product Sales,45000,35
+Services,32000,25
+Subscriptions,28000,22
+Consulting,18000,14
+Training,5000,4`
+    },
+    
+    kpi: {
+      name: 'kpi-example.csv',
+      content: `metric,value,target,trend,format
+Revenue,125000,150000,8.5,currency
+Users,5420,6000,12.3,number
+Conversion,3.2,4.0,-2.1,percent
+Satisfaction,4.7,4.5,5.2,number`
+    },
+    
+    all: {
+      name: 'all-templates.csv',
+      content: `# Time Series Data (for Line/Bar Charts)
+# Use this format for charts that show data over time
+date,revenue,expenses,profit
+2024-01,45000,32000,13000
+2024-02,52000,35000,17000
+2024-03,48000,33000,15000
+
+# Category Data (for Pie Charts)
+# Use this format for charts that show proportions
+category,value,percentage
+Product Sales,45000,35
+Services,32000,25
+Subscriptions,28000,22
+
+# KPI Metrics
+# Use this format for KPI cards
+metric,value,target,trend,format
+Revenue,125000,150000,8.5,currency
+Users,5420,6000,12.3,number
+
+# Instructions:
+# 1. Choose the section that matches your widget type
+# 2. Remove the # comment lines
+# 3. Keep only the data you need
+# 4. Add your own data following the same format
+# 5. Save and upload to the dashboard`
+    }
+  }
+
+  const template = templates[type as keyof typeof templates] || templates.all
+  
+  // Create blob and download
+  const blob = new Blob([template.content], { type: 'text/csv' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = template.name
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
 }
 
 // Load data sources from localStorage on mount
