@@ -34,27 +34,25 @@
       </v-app-bar>
 
       <!-- Main Content -->
-      <v-main>
-        <v-container fluid class="pa-6">
-          <div class="grid grid-cols-12 gap-6">
-            <!-- Left Sidebar - Widget Palette & Data Sources -->
-            <div class="col-span-2 flex flex-col space-y-4">
-              <WidgetPalette />
-              <DataSourcePanel />
-            </div>
-
-            <!-- Main Canvas Area -->
-            <div class="col-span-8">
-              <DashboardCanvas />
-            </div>
-
-            <!-- Right Sidebar - Property Editor -->
-            <div class="col-span-2 flex flex-col space-y-2">
-              <PropertyEditor />
-              <MinimizedWidgetsContainer />
-            </div>
+      <v-main class="main-content">
+        <div class="dashboard-layout">
+          <!-- Left Sidebar - Widget Palette & Data Sources -->
+          <div class="sidebar-left">
+            <WidgetPalette />
+            <DataSourcePanel />
           </div>
-        </v-container>
+
+          <!-- Main Canvas Area -->
+          <div class="canvas-area">
+            <DashboardCanvas />
+          </div>
+
+          <!-- Right Sidebar - Property Editor -->
+          <div class="sidebar-right">
+            <PropertyEditor />
+            <MinimizedWidgetsContainer />
+          </div>
+        </div>
       </v-main>
     </div>
   </v-app>
@@ -99,10 +97,56 @@ const saveDashboard = () => {
 }
 </script>
 
-<style>
-body {
-  margin: 0;
-  padding: 0;
+<style scoped>
+.main-content {
+  height: calc(100vh - 64px); /* Full viewport height minus header */
+  overflow: hidden;
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 256px 1fr 256px; /* Fixed sidebars, flexible canvas */
+  gap: 24px;
+  height: 100%;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.sidebar-left,
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.canvas-area {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Scrollbar styling for sidebars */
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-left::-webkit-scrollbar-track,
+.sidebar-right::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb:hover,
+.sidebar-right::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>
 

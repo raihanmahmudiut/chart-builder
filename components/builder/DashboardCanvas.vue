@@ -1,7 +1,7 @@
 <template>
   <div
     ref="canvasRef"
-    class="dashboard-canvas relative bg-gray-50 border border-gray-200 rounded-lg min-h-[600px] w-full overflow-hidden"
+    class="dashboard-canvas relative bg-gray-50 border border-gray-200 rounded-lg w-full h-full overflow-auto"
     role="application"
   >
     <!-- Grid background -->
@@ -154,6 +154,27 @@ onMounted(() => {
 <style scoped>
 .dashboard-canvas {
   position: relative;
+  min-height: 100%;
+}
+
+/* Custom scrollbar for canvas */
+.dashboard-canvas::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dashboard-canvas::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.dashboard-canvas::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dashboard-canvas::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 </style>
 
