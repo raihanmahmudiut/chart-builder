@@ -1,11 +1,19 @@
-export type WidgetType = 
-  | 'line-chart'  
+export type WidgetType =
+  | 'line-chart'
   | 'bar-chart'
   | 'pie-chart'
   | 'kpi-card'
   | 'data-table'
   | 'text-block'
   | 'image'
+
+export interface DataSource {
+  id: string
+  name: string
+  type: 'csv' | 'api'
+  data: Record<string, any>[]
+  columns: string[]
+}
 
 export interface Widget {
   id: string
@@ -15,13 +23,8 @@ export interface Widget {
   y: number
   width: number
   height: number
-  dataSource?: string
-  dataMapping: Record<string, string>
+  dataSourceId?: string
   settings: Record<string, any>
-  xAxis?: string
-  yAxis?: string
-  labelField?: string
-  valueField?: string
   isMinimized?: boolean
 }
 
@@ -32,7 +35,7 @@ export const DEFAULT_WIDGET_HEIGHTS: Record<WidgetType, number> = {
   'kpi-card': 1,
   'data-table': 4,
   'text-block': 2,
-  'image': 2
+  image: 2,
 }
 
 export const DEFAULT_WIDGET_WIDTHS: Record<WidgetType, number> = {
@@ -42,25 +45,33 @@ export const DEFAULT_WIDGET_WIDTHS: Record<WidgetType, number> = {
   'kpi-card': 3,
   'data-table': 6,
   'text-block': 4,
-  'image': 3
+  image: 3,
 }
 
 export function getWidgetIcon(type: WidgetType): string {
   switch (type) {
-    case 'line-chart': return 'mdi-chart-line'
-    case 'bar-chart': return 'mdi-chart-bar'
-    case 'pie-chart': return 'mdi-chart-pie'
-    case 'kpi-card': return 'mdi-trending-up'
-    case 'data-table': return 'mdi-table'
-    case 'text-block': return 'mdi-text'
-    case 'image': return 'mdi-image'
-    default: return 'mdi-square'
+    case 'line-chart':
+      return 'mdi-chart-line'
+    case 'bar-chart':
+      return 'mdi-chart-bar'
+    case 'pie-chart':
+      return 'mdi-chart-pie'
+    case 'kpi-card':
+      return 'mdi-trending-up'
+    case 'data-table':
+      return 'mdi-table'
+    case 'text-block':
+      return 'mdi-text'
+    case 'image':
+      return 'mdi-image'
+    default:
+      return 'mdi-square'
   }
 }
 
 export function getWidgetLabel(type: WidgetType): string {
-  return type.split('-').map(word => 
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join(' ')
+  return type
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
 }
-
