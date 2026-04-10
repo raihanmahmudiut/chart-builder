@@ -13,7 +13,7 @@
         class="absolute top-0 bottom-0 border-r border-dashed border-gray-200"
         :style="{ left: `${(i - 1) * (gridCellWidth + gridGap)}px`, width: '1px' }"
       />
-      
+
       <!-- Horizontal grid lines -->
       <div
         v-for="i in 20"
@@ -54,7 +54,6 @@ import { useResizeObserver } from '@vueuse/core'
 import type { WidgetType } from '~/types/widgets'
 import { DEFAULT_WIDGET_HEIGHTS, DEFAULT_WIDGET_WIDTHS, getWidgetLabel } from '~/types/widgets'
 import { useDashboardStore } from '~/stores/dashboard'
-import { useDroppable } from '~/composables/useDroppable'
 import WidgetWrapper from './WidgetWrapper.vue'
 
 const store = useDashboardStore()
@@ -87,6 +86,16 @@ const handleWidgetDrop = (detail: any) => {
   const gridY = Math.floor(detail.y / cellHeight.value)
 
   // Create new widget
+  const defaultSettings: Record<string, any> = {}
+  if (widgetType === 'kpi-card') {
+    Object.assign(defaultSettings, { value: 12500, target: 15000, format: 'currency', trend: 8.5 })
+  } else if (widgetType === 'text-block') {
+    defaultSettings.content = 'Enter your text here...'
+  } else if (widgetType === 'image') {
+    defaultSettings.imageUrl = ''
+    defaultSettings.objectFit = 'contain'
+  }
+
   const newWidget = {
     id: crypto.randomUUID(),
     type: widgetType,
@@ -95,13 +104,7 @@ const handleWidgetDrop = (detail: any) => {
     y: Math.max(0, gridY),
     width: DEFAULT_WIDGET_WIDTHS[widgetType] || 3,
     height: DEFAULT_WIDGET_HEIGHTS[widgetType] || 2,
-    dataMapping: {},
-    settings: widgetType === 'kpi-card' ? {
-      value: 12500,
-      target: 15000,
-      format: 'currency',
-      trend: 8.5
-    } : {}
+    settings: defaultSettings,
   }
 
   store.addWidget(newWidget)
@@ -127,7 +130,7 @@ onMounted(() => {
   const handleDrop = (event: DragEvent) => {
     event.preventDefault()
     element.classList.remove('drop-active')
-    
+
     const widgetType = event.dataTransfer?.getData('widget-type') as WidgetType
     if (!widgetType) return
 
@@ -177,4 +180,3 @@ onMounted(() => {
   background: #94a3b8;
 }
 </style>
-
