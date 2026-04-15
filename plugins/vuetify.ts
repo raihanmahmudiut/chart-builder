@@ -11,9 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     icons: {
       defaultSet: 'mdi',
       aliases,
-      sets: {
-        mdi,
-      },
+      sets: { mdi },
     },
     theme: {
       defaultTheme: 'light',
@@ -27,6 +25,22 @@ export default defineNuxtPlugin((nuxtApp) => {
             warning: '#f59e0b',
             info: '#3b82f6',
             success: '#10b981',
+            surface: '#ffffff',
+            background: '#f3f4f6',
+          },
+        },
+        dark: {
+          dark: true,
+          colors: {
+            primary: '#60a5fa',
+            secondary: '#94a3b8',
+            accent: '#a78bfa',
+            error: '#f87171',
+            warning: '#fbbf24',
+            info: '#60a5fa',
+            success: '#34d399',
+            surface: '#1e293b',
+            background: '#0f172a',
           },
         },
       },
@@ -35,4 +49,3 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.vueApp.use(vuetify)
 })
-

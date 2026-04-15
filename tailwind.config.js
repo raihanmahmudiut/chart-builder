@@ -8,14 +8,12 @@ export default {
     './app.vue',
     './error.vue',
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },
   plugins: [],
-  // Important: Prefix Tailwind classes to avoid conflicts with Vuetify
-  // prefix: 'tw-',
   corePlugins: {
-    preflight: false, // Disable Tailwind's base styles to avoid conflicts with Vuetify
-  }
+    preflight: false,
+  },
 }
-
