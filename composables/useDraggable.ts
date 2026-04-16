@@ -1,16 +1,13 @@
 import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 
 export interface DraggableOptions {
-  data?: Record<string, any>
+  data?: Record<string, string | number | boolean>
   fromPalette?: boolean
   onDragStart?: (event: DragEvent) => void
   onDragEnd?: (position: { x: number; y: number }) => void
 }
 
-export function useDraggable(
-  elementRef: Ref<HTMLElement | null>,
-  options: DraggableOptions = {}
-) {
+export function useDraggable(elementRef: Ref<HTMLElement | null>, options: DraggableOptions = {}) {
   const isDragging = ref(false)
 
   const handleDragStart = (event: DragEvent) => {
@@ -57,7 +54,7 @@ export function useDraggable(
       const rect = event.target.getBoundingClientRect()
       options.onDragEnd({
         x: rect.left,
-        y: rect.top
+        y: rect.top,
       })
     }
   }
@@ -80,7 +77,6 @@ export function useDraggable(
   })
 
   return {
-    isDragging
+    isDragging,
   }
 }
-

@@ -12,10 +12,7 @@ export interface DroppableOptions {
   onDrop?: (detail: DropItemDetail) => void
 }
 
-export function useDroppable(
-  elementRef: Ref<HTMLElement | null>,
-  options: DroppableOptions = {}
-) {
+export function useDroppable(elementRef: Ref<HTMLElement | null>, options: DroppableOptions = {}) {
   const isOver = ref(false)
 
   const handleDragOver = (event: DragEvent) => {
@@ -30,7 +27,7 @@ export function useDroppable(
     }
   }
 
-  const handleDragEnter = (event: DragEvent) => {
+  const handleDragEnter = (_event: DragEvent) => {
     isOver.value = true
     const element = elementRef.value
     if (element) {
@@ -38,7 +35,7 @@ export function useDroppable(
     }
   }
 
-  const handleDragLeave = (event: DragEvent) => {
+  const handleDragLeave = (_event: DragEvent) => {
     isOver.value = false
     const element = elementRef.value
     if (element) {
@@ -65,7 +62,7 @@ export function useDroppable(
         originalEvent: event,
         getData: (key: string) => event.dataTransfer?.getData(key) || null,
         x,
-        y
+        y,
       })
     }
   }
@@ -91,7 +88,6 @@ export function useDroppable(
   })
 
   return {
-    isOver
+    isOver,
   }
 }
-

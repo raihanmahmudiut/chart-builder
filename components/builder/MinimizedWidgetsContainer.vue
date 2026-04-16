@@ -42,4 +42,3 @@ const deleteWidget = (id: string) => {
   margin-top: 8px;
 }
 </style>
-

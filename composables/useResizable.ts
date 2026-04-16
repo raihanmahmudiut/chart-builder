@@ -12,10 +12,7 @@ export interface ResizableOptions {
 
 type HandlePosition = 'se' | 'sw' | 'ne' | 'nw' | 'n' | 's' | 'e' | 'w'
 
-export function useResizable(
-  elementRef: Ref<HTMLElement | null>,
-  options: ResizableOptions = {}
-) {
+export function useResizable(elementRef: Ref<HTMLElement | null>, options: ResizableOptions = {}) {
   const isResizing = ref(false)
   const handles: Array<{ element: HTMLElement; position: HandlePosition }> = []
 
@@ -36,7 +33,7 @@ export function useResizable(
 
     const positions: HandlePosition[] = ['se', 'sw', 'ne', 'nw', 'n', 's', 'e', 'w']
 
-    positions.forEach(position => {
+    positions.forEach((position) => {
       const handle = document.createElement('div')
       handle.className = `resize-handle resize-handle-${position}`
       handle.style.position = 'absolute'
@@ -194,7 +191,7 @@ export function useResizable(
       const rect = element.getBoundingClientRect()
       options.onResizeEnd({
         width: rect.width,
-        height: rect.height
+        height: rect.height,
       })
     }
   }
@@ -223,7 +220,6 @@ export function useResizable(
   })
 
   return {
-    isResizing
+    isResizing,
   }
 }
-

@@ -30,29 +30,29 @@ const widgetTypes: WidgetType[] = [
   'kpi-card',
   'data-table',
   'text-block',
-  'image'
+  'image',
 ]
 
 const paletteItemRefs = ref<HTMLElement[]>([])
 
 onMounted(async () => {
   await nextTick()
-  
+
   // Setup draggable for each palette item manually
   paletteItemRefs.value.forEach((element) => {
     if (element) {
       const widgetType = element.getAttribute('data-widget-type')
-      
+
       // Set draggable attribute
       element.setAttribute('draggable', 'true')
-      
+
       // Add dragstart event
       element.addEventListener('dragstart', (event: DragEvent) => {
         if (!event.dataTransfer) return
-        
+
         event.dataTransfer.setData('widget-type', widgetType || '')
         event.dataTransfer.effectAllowed = 'copy'
-        
+
         // Create ghost image
         const rect = element.getBoundingClientRect()
         const ghostNode = element.cloneNode(true) as HTMLElement
@@ -62,7 +62,7 @@ onMounted(async () => {
         ghostNode.style.position = 'absolute'
         ghostNode.style.top = '-1000px'
         ghostNode.style.backgroundColor = 'rgba(59, 130, 246, 0.5)'
-        
+
         document.body.appendChild(ghostNode)
         event.dataTransfer.setDragImage(ghostNode, rect.width / 2, rect.height / 2)
         setTimeout(() => document.body.removeChild(ghostNode), 0)
@@ -81,4 +81,3 @@ onMounted(async () => {
   user-select: none;
 }
 </style>
-
