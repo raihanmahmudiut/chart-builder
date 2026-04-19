@@ -84,34 +84,40 @@ vue-dashboard-builder/
 ## Core Features Implemented
 
 ### ✅ Drag & Drop
+
 - Drag widgets from the palette to the canvas
 - Reposition widgets on the canvas
 - Visual feedback during drag operations
 - Snap-to-grid positioning
 
 ### ✅ Resize
+
 - 8-directional resize handles (N, S, E, W, NE, NW, SE, SW)
 - Minimum and maximum size constraints
 - Grid-based resizing
 
 ### ✅ State Management
+
 - Centralized Pinia store
 - Auto-save to localStorage
 - Persistent state across page reloads
 
 ### ✅ Widget Types
+
 - **Line Chart** - Time series data visualization
 - **Bar Chart** - Comparison data visualization
 - **Pie Chart** - Proportion data visualization
 - **KPI Card** - Key performance indicators with trends
 
 ### ✅ Property Editor
+
 - Edit widget title
 - Adjust position (X, Y)
 - Adjust size (Width, Height)
 - View widget type
 
 ### ✅ Widget Management
+
 - Minimize/restore widgets
 - Delete widgets
 - Select widgets for editing
@@ -120,16 +126,19 @@ vue-dashboard-builder/
 ## Technology Stack
 
 ### Core Framework
+
 - **Nuxt 3** - Vue framework with SSR, file-based routing, and auto-imports
 - **Vue 3** - Composition API for reactive components
 - **TypeScript** - Type-safe development
 
 ### UI Libraries
+
 - **Vuetify 3** - Material Design component library
 - **Tailwind CSS** - Utility-first CSS framework
 - **Material Design Icons** - Icon set
 
 ### State & Utilities
+
 - **Pinia** - State management
 - **VueUse** - Composition utilities (ResizeObserver, etc.)
 - **Chart.js** - Charting library
@@ -137,39 +146,49 @@ vue-dashboard-builder/
 ## Key Differences from Svelte Version
 
 ### 1. **Reactivity System**
+
 - **Svelte**: Compiler-based reactivity with `$:` syntax
 - **Vue**: Composition API with `ref()`, `computed()`, `watch()`
 
 ### 2. **Component Structure**
+
 - **Svelte**: `<script>`, `<template>`, `<style>` (script first)
 - **Vue**: `<template>`, `<script setup>`, `<style>` (template first)
 
 ### 3. **State Management**
+
 - **Svelte**: Svelte stores with `writable()`
 - **Vue**: Pinia stores with `defineStore()`
 
 ### 4. **Actions/Directives**
+
 - **Svelte**: Custom actions with `use:action`
 - **Vue**: Composables with lifecycle hooks
 
 ### 5. **Event Handling**
+
 - **Svelte**: `on:event` syntax
 - **Vue**: `@event` syntax
 
 ### 6. **Conditional Rendering**
+
 - **Svelte**: `{#if}...{/if}` blocks
 - **Vue**: `v-if`, `v-else`, `v-for` directives
 
 ## Configuration Notes
 
 ### Vuetify + Tailwind Coexistence
+
 The project is configured to use both Vuetify and Tailwind:
+
 - Vuetify provides Material Design components (cards, buttons, inputs)
 - Tailwind provides utility classes for custom styling
 - Tailwind's preflight is disabled to avoid conflicts
 
 ### Auto-imports
+
 Nuxt 3 auto-imports:
+
 - Vue composables (`ref`, `computed`, `watch`, etc.)
 - Nuxt composables (`useHead`, `navigateTo`, etc.)
 - Components from `components/` directory
@@ -178,26 +197,33 @@ Nuxt 3 auto-imports:
 ## Development Tips
 
 ### 1. Hot Module Replacement (HMR)
+
 Nuxt 3 has excellent HMR. Changes to components, pages, and stores will update instantly.
 
 ### 2. Type Safety
+
 The project uses TypeScript. Run type checking with:
+
 ```bash
 npm run check
 ```
 
 ### 3. Linting
+
 Format code with:
+
 ```bash
 npm run format
 ```
 
 Lint code with:
+
 ```bash
 npm run lint
 ```
 
 ### 4. Building for Production
+
 ```bash
 npm run build
 npm run preview
@@ -206,21 +232,25 @@ npm run preview
 ## Troubleshooting
 
 ### Issue: Drag and drop not working
+
 - Ensure the browser supports HTML5 drag and drop API
 - Check browser console for errors
 - Verify composables are properly initialized
 
 ### Issue: Widgets not saving
+
 - Check browser localStorage is enabled
 - Open DevTools → Application → Local Storage
 - Look for `dashboard-builder-state` key
 
 ### Issue: Charts not rendering
+
 - Ensure Chart.js is properly installed
 - Check canvas element is mounted
 - Verify widget data is properly formatted
 
 ### Issue: Vuetify components not styled
+
 - Ensure Vuetify plugin is loaded
 - Check `@mdi/font` is installed
 - Verify `vuetify/styles` is imported
@@ -260,6 +290,7 @@ To extend the dashboard builder:
 ## Support
 
 For issues or questions:
+
 1. Check this documentation
 2. Review the original Svelte implementation
 3. Check Nuxt 3, Vuetify, and Vue documentation
@@ -267,4 +298,3 @@ For issues or questions:
 ## License
 
 MIT
-

@@ -71,21 +71,25 @@ vue-dashboard-builder/
 ## Core Functionality
 
 ### Drag & Drop
+
 - Drag widgets from palette to canvas
 - Reposition existing widgets
 - Visual feedback during drag operations
 
 ### Resize
+
 - 8-directional resize handles
 - Snap to grid
 - Minimum/maximum size constraints
 
 ### State Management
+
 - Centralized Pinia store
 - Auto-save to localStorage
 - Undo/redo support (coming soon)
 
 ### Widget Types
+
 - Line Chart
 - Bar Chart
 - Pie Chart
@@ -97,4 +101,3 @@ vue-dashboard-builder/
 ## License
 
 MIT
-

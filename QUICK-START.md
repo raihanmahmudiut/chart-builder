@@ -80,21 +80,25 @@ Open your browser to `http://localhost:3000`
 ## 🎨 Available Widgets
 
 ### Line Chart
+
 - **Purpose**: Time series data visualization
 - **Demo Data**: 6 months of revenue data
 - **Features**: Smooth curves, tooltips, legend
 
 ### Bar Chart
+
 - **Purpose**: Comparison data visualization
 - **Demo Data**: Quarterly performance data
 - **Features**: Vertical bars, tooltips, legend
 
 ### Pie Chart
+
 - **Purpose**: Proportion data visualization
 - **Demo Data**: Revenue breakdown by category
 - **Features**: Percentage labels, color-coded segments
 
 ### KPI Card
+
 - **Purpose**: Key performance indicators
 - **Demo Data**: Revenue with target and trend
 - **Features**: Large value, target, trend indicator
@@ -102,17 +106,20 @@ Open your browser to `http://localhost:3000`
 ## 🎯 Tips & Tricks
 
 ### Keyboard Shortcuts
+
 - **Delete**: Select a widget and press Delete key (not implemented yet)
 - **Escape**: Deselect widget (not implemented yet)
 - **Ctrl+Z**: Undo (not implemented yet)
 
 ### Grid System
+
 - **12 Columns**: Canvas has 12 columns
 - **Cell Height**: Each row is 40px
 - **Gap**: 4px between cells
 - **Snap**: Widgets snap to grid automatically
 
 ### Best Practices
+
 1. **Organize**: Group related widgets together
 2. **Spacing**: Leave space between widgets for clarity
 3. **Size**: Make charts at least 4x3 for readability
@@ -122,19 +129,23 @@ Open your browser to `http://localhost:3000`
 ### Common Issues
 
 **Widget won't drop?**
+
 - Make sure you're dropping inside the canvas area
 - Check that the canvas is visible and not covered
 
 **Widget disappeared?**
+
 - Check if it was minimized (right sidebar)
 - Check if it's off-screen (scroll or adjust position)
 
 **Charts not rendering?**
+
 - Refresh the page
 - Check browser console for errors
 - Make sure widget is large enough (min 200px height)
 
 **Changes not saving?**
+
 - Check browser localStorage is enabled
 - Open DevTools → Application → Local Storage
 - Look for `dashboard-builder-state` key
@@ -170,19 +181,25 @@ vue-dashboard-builder/
 ## 🔧 Configuration
 
 ### Change Grid Size
+
 Edit `stores/dashboard.ts`:
+
 ```typescript
-gridSize: 12  // Change to 16, 24, etc.
+gridSize: 12 // Change to 16, 24, etc.
 ```
 
 ### Change Cell Height
+
 Edit `components/builder/DashboardCanvas.vue`:
+
 ```typescript
-const cellHeight = ref(40)  // Change to 50, 60, etc.
+const cellHeight = ref(40) // Change to 50, 60, etc.
 ```
 
 ### Change Theme Colors
+
 Edit `plugins/vuetify.ts`:
+
 ```typescript
 colors: {
   primary: '#3b82f6',  // Change to your color
@@ -191,6 +208,7 @@ colors: {
 ```
 
 ### Add New Widget Type
+
 1. Add type to `types/widgets.ts`
 2. Create widget component in `components/widgets/`
 3. Add to `WidgetFactory.vue`
@@ -199,23 +217,27 @@ colors: {
 ## 🐛 Debugging
 
 ### Enable Vue DevTools
+
 1. Install Vue DevTools browser extension
 2. Open DevTools → Vue tab
 3. Inspect components, state, events
 
 ### Check Store State
+
 ```javascript
 // In browser console
 $pinia.state.value.dashboard
 ```
 
 ### Check LocalStorage
+
 ```javascript
 // In browser console
 localStorage.getItem('dashboard-builder-state')
 ```
 
 ### Clear Cache
+
 ```javascript
 // In browser console
 localStorage.clear()
@@ -226,24 +248,27 @@ location.reload()
 
 1. **Read FEATURES.md** - See all implemented features
 2. **Read SETUP.md** - Detailed setup instructions
-4. **Explore Code** - Dive into the implementation
-5. **Customize** - Make it your own!
+3. **Explore Code** - Dive into the implementation
+4. **Customize** - Make it your own!
 
 ## 🎓 Learning Path
 
 ### Beginner
+
 1. Use the dashboard builder as-is
 2. Add and arrange widgets
 3. Save and load dashboards
 4. Experiment with different layouts
 
 ### Intermediate
+
 1. Modify existing widgets
 2. Change colors and styles
 3. Add new widget types
 4. Customize grid settings
 
 ### Advanced
+
 1. Add data source integration
 2. Implement backend persistence
 3. Add user authentication
@@ -252,18 +277,21 @@ location.reload()
 ## 💡 Ideas for Extension
 
 ### Easy
+
 - [ ] Add more demo data to widgets
 - [ ] Change color schemes
 - [ ] Add more widget icons
 - [ ] Customize grid appearance
 
 ### Medium
+
 - [ ] Add undo/redo functionality
 - [ ] Implement dashboard templates
 - [ ] Add widget settings panel
 - [ ] Create custom widget types
 
 ### Hard
+
 - [ ] Connect to real APIs
 - [ ] Add real-time data updates
 - [ ] Implement collaborative editing
@@ -272,6 +300,7 @@ location.reload()
 ## 🤝 Getting Help
 
 ### Resources
+
 - **Vue 3 Docs**: https://vuejs.org
 - **Nuxt 3 Docs**: https://nuxt.com
 - **Vuetify Docs**: https://vuetifyjs.com
@@ -299,4 +328,3 @@ A: Run `npm run build` then deploy the `.output` directory to any Node.js host.
 Start building your dashboard now. Drag, drop, resize, and create something amazing!
 
 **Happy Building! 🚀**
-
