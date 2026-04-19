@@ -10,27 +10,52 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.1",
     "chart.js": "^4.4.9",
+    "html2canvas": "^1.4.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.0",
     "vuetify": "^3.5.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.0",
+    "@nuxt/test-utils": "^4.0.2",
     "@nuxtjs/tailwindcss": "^6.12.0",
+    "@pinia/testing": "^1.0.3",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vue/test-utils": "^2.4.6",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "eslint": "^9.0.0",
+    "happy-dom": "^20.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "nuxt": "^3.11.0",
     "prettier": "^3.2.5",
     "sass": "^1.72.0",
     "typescript": "^5.9.3",
     "vite-plugin-vuetify": "^2.0.3",
+    "vitest": "^4.1.4",
     "vue-tsc": "^3.1.5"
   }
 }
